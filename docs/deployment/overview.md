@@ -25,10 +25,10 @@ https://demo.yeahboot.com/api/**
 ## 推荐目录
 
 ```text
-/srv/yeahboot/site               官网
-/srv/yeahboot/docs               文档构建结果
-/srv/yeahboot/admin              管理后台 dist
-/opt/yeahboot/backend            后端 Jar
+/var/www/yeahboot/site           官网静态文件
+/var/www/yeahboot/docs           文档构建结果
+/var/www/yeahboot/admin          管理后台 dist
+/root/ysm.d/yeahboot.d/yeah-boot 后端 Jar 与 deploy.sh
 /var/lib/yeahboot/upload         本地上传文件
 /var/log/yeahboot                应用日志
 ```
@@ -74,6 +74,16 @@ mvn clean package -DskipTests
 ```text
 yeah-admin/target/yeah-admin.jar
 ```
+
+## Jenkins 发布
+
+三个前端仓库不维护单独的部署脚本，直接在 Jenkins 的“执行 shell”中完成构建和发布。Jenkins 节点需要预先配置 SSH 私钥、known_hosts 和 `rsync`。
+
+发布命令使用 `rsync --delete` 清理旧的静态资源，因此 `/var/www/yeahboot/site`、`/var/www/yeahboot/docs`、`/var/www/yeahboot/admin` 必须分别专用于对应站点。
+
+管理后台构建时固定设置 `VITE_API_BASE_URL=/api`，由 Nginx 将同源请求代理给后端。
+
+后端仍保持“构建 Jar → 上传 Jar → SSH 执行 `deploy.sh restart`”的方式。
 
 ## 发布顺序
 

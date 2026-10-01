@@ -163,7 +163,8 @@ export default defineConfig({
       text: "在 GitHub 上编辑此页",
     },
     footer: {
-      message: "YeahBoot 官方技术文档",
+      message:
+        'YeahBoot 官方技术文档 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">浙ICP备2024075106号-6</a>',
       copyright: "Copyright © 2026 YeahBoot",
     },
     returnToTopLabel: "返回顶部",

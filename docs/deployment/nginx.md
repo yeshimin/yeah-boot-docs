@@ -5,16 +5,23 @@ description: yeahboot.com、docs.yeahboot.com 和 demo.yeahboot.com 的 Nginx �
 
 # Nginx 配置
 
-以下片段只展示核心逻辑，证书路径、日志路径和安全策略按服务器环境填写。
+完整示例位于 `yeah-boot-site/nginx/yeahboot.com.conf`。静态文件发布到 `/var/www/yeahboot`，不要直接让 Nginx 从 `/root` 下读取仓库文件。
+
+三个域名可以共用一个 SAN 证书：
+
+```bash
+certbot certonly --nginx --cert-name yeahboot.com \
+  -d yeahboot.com -d docs.yeahboot.com -d demo.yeahboot.com
+```
 
 ## 官网
 
 ```nginx
 server {
     listen 443 ssl http2;
-    server_name yeahboot.com www.yeahboot.com;
+    server_name yeahboot.com;
 
-    root /srv/yeahboot/site;
+    root /var/www/yeahboot/site;
     index index.html;
 
     location / {
@@ -34,7 +41,7 @@ server {
     listen 443 ssl http2;
     server_name docs.yeahboot.com;
 
-    root /srv/yeahboot/docs;
+    root /var/www/yeahboot/docs;
     index index.html;
 
     location / {
@@ -60,7 +67,7 @@ server {
     listen 443 ssl http2;
     server_name demo.yeahboot.com;
 
-    root /srv/yeahboot/admin;
+    root /var/www/yeahboot/admin;
     index index.html;
 
     location / {
