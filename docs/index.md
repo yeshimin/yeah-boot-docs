@@ -7,7 +7,7 @@ description: YeahBoot 后台开发基础项目的安装、架构、权限、功�
 hero:
   name: YeahBoot
   text: 清晰、实用的后台开发基础项目
-  tagline: 基于 Java 8、Spring Boot 2.7 与 Vue 3，提供认证权限、系统管理、文件存储、运行时配置和常用工程能力。
+  tagline: 基于 Java 21、Spring Boot 3.5 与 Vue 3，提供认证权限、系统管理、文件存储、运行时配置和常用工程能力。
   image:
     src: /logo.svg
     alt: YeahBoot
@@ -48,7 +48,7 @@ features:
 - 第一次运行项目：阅读[快速开始](/guide/quick-start)。
 - 准备配置环境：阅读[运行配置](/guide/configuration)。
 - 理解授权设计：阅读[资源权限模型](/architecture/permission)。
-- 开发新功能：阅读[新增业务模块](/backend/new-module)和[新增业务页面](/frontend/new-page)。
+- 开发新功能：阅读[新增业务模块](/backend/new-module)、[新增业务页面](/frontend/new-page)和[项目结构](/guide/project-structure)。
 - 准备上线：阅读[部署方案](/deployment/overview)和[上线检查清单](/deployment/checklist)。
 
 ::: warning 演示环境

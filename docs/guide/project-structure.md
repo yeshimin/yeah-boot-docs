@@ -38,6 +38,12 @@ yeah-boot
 - 与业务无关、可复用的框架能力放在 `yeah-framework`。
 - 不要为了复用一行代码制造跨模块反向依赖。
 
+### 二次开发与升级
+
+二次开发将 `yeah-framework`、`yeah-biz-common` 和 `yeah-upms`、`yeah-basic`、`yeah-public` 等内置模块视为上游基线。项目领域代码推荐创建独立的 `yeah-biz-<domain>` 模块，而不是直接修改内置模块；启动工程仅保留模块依赖与入口装配。
+
+这样升级 YeahBoot 时，冲突会集中在少量 Maven 集成文件和资源数据，而不会扩散到认证、权限、存储等通用实现。环境差异与凭据应保留在部署环境或 Jar 同级 `config/`，不要写入默认配置。
+
 ## 管理后台仓库
 
 ```text
@@ -66,6 +72,12 @@ View
 ```
 
 新增页面时应同时考虑 TypeScript 类型、API 封装、资源路径、按钮视图权限和后端接口权限，而不是只创建一个 `.vue` 文件。
+
+### 二次开发与升级
+
+项目业务页面放在 `src/views/<domain>/`，接口和类型分别放在 `src/api/<domain>.ts`、`src/types/<domain>.ts`。不要将项目业务直接写入 `utils/request.ts`、认证 Store、系统路由映射或布局组件；这些是后台框架基础设施。
+
+自定义页面资源使用非 `/system/**` 的路径，例如 `/biz/order`，组件路径填写 `biz/order/index`。路由会按该路径从 `src/views` 解析，无需为普通业务页面修改内置系统路由映射。
 
 ## 三个入口的边界
 

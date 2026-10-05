@@ -11,7 +11,7 @@ YeahBoot 是一套面向后台管理与 App 配套服务的前后端分离基础
 
 | 仓库              | 作用     | 主要技术                                               |
 | ----------------- | -------- | ------------------------------------------------------ |
-| `yeah-boot`       | 后端服务 | Java 8、Spring Boot 2.7、Spring Security、MyBatis-Plus |
+| `yeah-boot`       | 后端服务 | Java 21、Spring Boot 3.5、Spring Security、MyBatis-Plus |
 | `yeah-boot-admin` | 管理后台 | Vue 3、TypeScript、Vite、Element Plus、Pinia           |
 | `yeah-boot-site`  | 官方主站 | 原生 HTML、CSS、JavaScript                             |
 | `yeah-boot-docs`  | 官方文档 | VitePress                                              |

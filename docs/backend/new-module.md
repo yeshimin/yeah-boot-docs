@@ -7,14 +7,21 @@ description: 在 YeahBoot 后端新增实体、DTO、Repo、Service、Controller
 
 以下流程适用于新增一个管理端业务实体。示例使用 `Example`，请替换为真实业务名称。
 
+## 二次开发与升级边界
+
+YeahBoot 的 `yeah-framework`、`yeah-biz-common` 和内置 `yeah-upms`、`yeah-basic`、`yeah-public` 模块应视为上游基线。除可回馈的通用缺陷修复外，不要将具体项目业务直接写入这些模块。
+
+推荐为项目领域创建独立 Maven 模块，例如 `yeah-biz-order`、`yeah-biz-member`，并在模块内维护自己的 Entity、DTO、Mapper、Repo、Service 和 Controller。仅在根聚合、启动工程依赖、资源数据和数据库迁移处做最小接入，这样升级上游时更容易保留业务代码。
+
 ## 1. 确定模块位置
 
-- 系统权限类业务：放在 `yeah-upms`。
-- 文件、地区等基础业务：放在 `yeah-basic`。
-- 跨业务共享实体：放在 `yeah-biz-data`。
-- 可独立复用且不依赖具体业务：评估放入 `yeah-framework`。
+- 项目专属领域业务：新建独立 `yeah-biz-<domain>` 模块。
+- 准备回馈给框架的系统权限能力：评估放入 `yeah-upms`。
+- 准备回馈给框架的文件、地区等基础能力：评估放入 `yeah-basic`。
+- 多个业务模块确实需要共享且不含领域语义的数据：评估放入 `yeah-biz-common`。
+- 与业务无关、可复用的基础设施：评估放入 `yeah-framework`。
 
-不要为了一个简单页面新建 Maven 模块。
+后二至四项属于框架演进，必须先确认它不是项目私有需求；普通二开默认选择独立业务模块。
 
 ## 2. 设计表和实体
 
@@ -90,3 +97,12 @@ public R<ExampleEntity> create(@Valid @RequestBody ExampleCreateDto dto) {
 - Maven 构建通过。
 
 最后同步新增前端页面文档和接口说明，避免功能存在但无人知道如何授权。
+
+## 9. 升级验证
+
+升级 YeahBoot 时，在独立升级分支先合并上游版本，再恢复自定义模块的最小集成改动。重点检查：
+
+- Maven 模块与依赖版本是否仍能解析。
+- 数据库迁移、资源权限和运行时系统参数是否完整。
+- 管理后台的组件路径、`view:` 按钮资源与 `api:` 接口资源是否仍一致。
+- `mvn clean package -DskipTests`、前端类型检查和生产构建是否通过。
