@@ -17,6 +17,68 @@
   vertical-align: -2px;
 }
 
+.repo-clone-tabs {
+  overflow: hidden;
+  margin: 20px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+}
+
+.repo-source-switch {
+  display: flex;
+  gap: 4px;
+  padding: 8px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+}
+
+.repo-source-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.repo-source-button:hover {
+  color: var(--vp-c-text-1);
+}
+
+.repo-source-button.is-active {
+  border-color: var(--vp-c-divider);
+  background: var(--vp-c-bg);
+  color: var(--vp-c-brand-1);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+}
+
+.repo-source-button img {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.repo-clone-code {
+  overflow-x: auto;
+  margin: 0;
+  padding: 16px 18px;
+  background: var(--vp-code-bg);
+  color: var(--vp-code-color);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.repo-clone-code span {
+  display: block;
+}
+
 .vp-doc table {
   display: table;
   width: 100%;

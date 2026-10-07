@@ -20,10 +20,7 @@ description: 从源码、数据库和 Redis 准备到启动 YeahBoot 前后端�
 
 ## 1. 获取源码
 
-```bash
-git clone https://github.com/yeshimin/yeah-boot.git
-git clone https://github.com/yeshimin/yeah-boot-admin.git
-```
+<RepoCloneTabs :repos="['yeah-boot', 'yeah-boot-admin']" />
 
 ## 2. 初始化数据库
 
