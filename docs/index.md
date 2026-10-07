@@ -1,55 +1,38 @@
 ---
-layout: home
-title: YeahBoot 文档
-titleTemplate: false
-description: YeahBoot 后台开发基础项目的安装、架构、权限、功能开发与部署文档。
-
-hero:
-  name: YeahBoot
-  text: 清晰、实用的后台开发基础项目
-  tagline: 基于 Java 21、Spring Boot 3.5 与 Vue 3，提供认证权限、系统管理、文件存储、运行时配置和常用工程能力。
-  image:
-    src: /logo.svg
-    alt: YeahBoot
-  actions:
-    - theme: brand
-      text: 快速开始
-      link: /guide/quick-start
-    - theme: alt
-      text: 理解权限模型
-      link: /architecture/permission
-    - theme: alt
-      text: 在线演示
-      link: https://demo.yeahboot.com
-
-features:
-  - icon: 🔐
-    title: 认证与权限
-    details: JWT 与 Redis 联合维护登录状态，菜单、页面、按钮和接口权限各司其职。
-  - icon: 🧩
-    title: 模块化后端
-    details: 启动工程、业务模块、通用数据和基础框架分层清晰，可完整使用也可按需裁剪。
-  - icon: 🗂️
-    title: 系统管理
-    details: 用户、角色、资源、组织、岗位、字典、日志和动态系统参数形成完整闭环。
-  - icon: 📦
-    title: 文件存储
-    details: 统一抽象本地、MinIO 和七牛存储，支持上传、下载、预览和引用保护。
-  - icon: 🛠️
-    title: 工程能力
-    details: 统一异常、Trace ID、限流、数据脱敏、逻辑删除和 Excel 导入导出。
-  - icon: 🚀
-    title: 可直接部署
-    details: 文档和官网使用静态托管，管理后台与 API 通过 Nginx 同源发布。
+layout: doc
+title: 开始使用
+description: YeahBoot 文档首页，包含项目启动、模块说明、开发、接口与部署文档入口。
 ---
 
-## 从哪里开始
+# 开始使用
 
-- 第一次运行项目：阅读[快速开始](/guide/quick-start)。
-- 准备配置环境：阅读[运行配置](/guide/configuration)。
-- 理解授权设计：阅读[资源权限模型](/architecture/permission)。
-- 开发新功能：阅读[新增业务模块](/backend/new-module)、[新增业务页面](/frontend/new-page)和[项目结构](/guide/project-structure)。
-- 准备上线：阅读[部署方案](/deployment/overview)和[上线检查清单](/deployment/checklist)。
+YeahBoot 是一套开源后台快速开发框架，基于 Java 21、Spring Boot 3.5 与 Vue 3。本文档记录项目的启动、配置、模块使用、前后端开发、接口参考和部署方式。
+
+## 推荐阅读顺序
+
+1. [快速开始](/guide/quick-start)：准备环境、初始化数据库并启动后端和管理后台。
+2. [运行配置](/guide/configuration)：区分本地、测试和生产环境配置。
+3. [项目结构](/guide/project-structure)：了解后端模块和管理后台目录的职责。
+4. [管理功能](/modules/user)：了解内置的用户、角色、资源、文件和系统参数等模块。
+5. [新增业务模块](/backend/new-module) 与 [新增业务页面](/frontend/new-page)：在现有项目上开发具体业务。
+6. [部署方案](/deployment/overview)：构建、发布和上线检查。
+
+## 当前技术基线
+
+| 组成 | 技术 |
+| --- | --- |
+| 后端 | Java 21、Spring Boot 3.5、Spring Security、MyBatis-Plus |
+| 管理后台 | Vue 3、TypeScript、Vite、Element Plus、Pinia |
+| 数据与缓存 | MySQL、Redis |
+| 常用扩展 | MinIO / 七牛、短信通知、WebSocket、Redis 消息队列 |
+
+## 常用入口
+
+- [项目介绍](/guide/introduction)
+- [数据库初始化](/guide/database)
+- [整体架构](/architecture/overview)
+- [接口约定](/api/overview)
+- [常见问题](/troubleshooting/common)
 
 ::: warning 演示环境
 公开 Demo 只用于体验界面和交互，请勿录入真实账号、客户资料、联系方式或其他敏感数据。

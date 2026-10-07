@@ -43,18 +43,33 @@ export default defineConfig({
     logo: "/logo.svg",
     siteTitle: "YeahBoot",
     nav: [
-      { text: "指南", link: "/guide/introduction" },
+      { text: "开始使用", link: "/" },
       { text: "架构", link: "/architecture/overview" },
       { text: "功能", link: "/modules/user" },
       { text: "开发", link: "/backend/crud" },
       { text: "部署", link: "/deployment/overview" },
       { text: "官网", link: "https://yeahboot.com" },
       { text: "在线演示", link: "https://demo.yeahboot.com" },
+      {
+        text: '<img class="vp-source-icon" src="/github.favicon.ico" alt="" aria-hidden="true">GitHub',
+        link: "https://github.com/yeshimin/yeah-boot",
+        target: "_blank",
+        rel: "noopener noreferrer",
+        noIcon: true,
+      },
+      {
+        text: '<img class="vp-source-icon" src="/gitee.favicon.ico" alt="" aria-hidden="true">Gitee',
+        link: "https://gitee.com/yeshimin/yeah-boot.git",
+        target: "_blank",
+        rel: "noopener noreferrer",
+        noIcon: true,
+      },
     ],
     sidebar: [
       {
         text: "开始使用",
         items: [
+          { text: "文档首页", link: "/" },
           { text: "项目介绍", link: "/guide/introduction" },
           { text: "快速开始", link: "/guide/quick-start" },
           { text: "数据库初始化", link: "/guide/database" },
@@ -133,9 +148,6 @@ export default defineConfig({
           { text: "项目路线图", link: "/roadmap" },
         ],
       },
-    ],
-    socialLinks: [
-      { icon: "github", link: "https://github.com/yeshimin/yeah-boot" },
     ],
     search: {
       provider: "local",
