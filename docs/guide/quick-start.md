@@ -96,4 +96,4 @@ npm run build
 
 - [理解项目结构](/guide/project-structure)
 - [配置资源权限](/architecture/permission)
-- [部署到服务器](/deployment/overview)
+- [部署后端服务](/deployment/backend-service)

@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-构建结果位于 `docs/.vitepress/dist`，可直接部署到 `docs.yeahboot.com` 对应的 Nginx 静态目录。
+构建结果位于 `docs/.vitepress/dist`。本站仓库仅维护文档源码和构建产物，不包含服务器、域名或反向代理部署配置。
 
 ## 内容约定
 

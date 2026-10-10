@@ -15,7 +15,7 @@ YeahBoot 是一套开源后台快速开发框架，基于 Java 21、Spring Boot 
 3. [项目结构](/guide/project-structure)：了解后端模块和管理后台目录的职责。
 4. [管理功能](/modules/user)：了解内置的用户、角色、资源、文件和系统参数等模块。
 5. [新增业务模块](/backend/new-module) 与 [新增业务页面](/frontend/new-page)：在现有项目上开发具体业务。
-6. [部署方案](/deployment/overview)：构建、发布和上线检查。
+6. [部署方案](/deployment/overview) 与 [后端服务](/deployment/backend-service)：构建、发布、运行和上线检查。
 
 ## 当前技术基线
 

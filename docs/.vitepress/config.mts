@@ -133,7 +133,7 @@ export default defineConfig({
         text: "部署运维",
         items: [
           { text: "部署方案", link: "/deployment/overview" },
-          { text: "Nginx 配置", link: "/deployment/nginx" },
+          { text: "管理后台与 API 代理", link: "/deployment/nginx" },
           { text: "后端服务", link: "/deployment/backend-service" },
           { text: "公开 Demo", link: "/deployment/demo" },
           { text: "上线检查清单", link: "/deployment/checklist" },

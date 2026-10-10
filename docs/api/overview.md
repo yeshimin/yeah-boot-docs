@@ -14,7 +14,7 @@ description: YeahBoot API 前缀、认证、分页、统一响应、文件响应
 | `/public` | 明确公开访问 | 不要求登录，但仍需业务安全校验 |
 | `/auth`   | 通用认证操作 | 例如退出登录                   |
 
-浏览器生产环境建议请求同源 `/api/**`，Nginx 转发时去掉 `/api`：
+浏览器生产环境建议请求同源 `/api/**`，Nginx 或其他反向代理转发时去掉 `/api`：
 
 ```text
 /api/admin/sysUser/query
