@@ -107,6 +107,7 @@ export default defineConfig({
           { text: "文件存储", link: "/backend/storage" },
           { text: "日志与数据安全", link: "/backend/logging-security" },
           { text: "限流", link: "/backend/rate-limit" },
+          { text: "报文加密与幂等", link: "/security/application-security-baseline" },
           { text: "Excel 导入导出", link: "/backend/excel" },
           { text: "新增业务模块", link: "/backend/new-module" },
         ],
@@ -127,6 +128,12 @@ export default defineConfig({
           { text: "认证接口", link: "/api/auth" },
           { text: "管理接口", link: "/api/admin" },
           { text: "文件与公开接口", link: "/api/file" },
+        ],
+      },
+      {
+        text: "安全基线",
+        items: [
+          { text: "应用安全基线", link: "/security/application-security-baseline" },
         ],
       },
       {

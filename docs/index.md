@@ -31,6 +31,7 @@ YeahBoot 是一套开源后台快速开发框架，基于 Java 21、Spring Boot 
 - [项目介绍](/guide/introduction)
 - [数据库初始化](/guide/database)
 - [整体架构](/architecture/overview)
+- [应用安全基线](/security/application-security-baseline)
 - [接口约定](/api/overview)
 - [常见问题](/troubleshooting/common)
 

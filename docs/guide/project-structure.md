@@ -20,6 +20,7 @@ yeah-boot
 │   └── yeah-upms              用户、角色、资源、组织等
 └── yeah-framework
     ├── yeah-auth              认证鉴权与 Token
+    ├── yeah-encryption        API 报文加解密与防重放
     ├── yeah-common-core       返回、异常、日志、校验等
     ├── yeah-common-data       系统通用数据层
     ├── yeah-flowcontrol       接口限流

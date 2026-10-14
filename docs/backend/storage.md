@@ -41,6 +41,17 @@ SysStorageEntity storage = storageManager.put(
 
 后两个布尔值分别表示是否公开和是否已经被业务使用。新上传但未引用的文件会设置可清理时间，便于后续垃圾文件清理。
 
+## 上传策略
+
+上传策略由 `sys_config` 动态控制：
+
+- `admin.storage.upload.max-size-mb`：单文件应用层大小上限；还需与 Spring Multipart 和 Nginx 的请求体上限保持一致。
+- `admin.storage.upload.validation.enabled`：是否执行扩展名、MIME 和已支持类型的文件头校验；文件非空和大小限制始终执行。
+- `admin.storage.upload.allowed-extensions`、`admin.storage.upload.allowed-mime-types`：上传类型白名单。允许类型由配置决定，配置 HTML 等主动内容时应只用于私有下载场景。
+- `admin.storage.upload.public-preview.enabled`、`admin.storage.upload.public-preview.allowed-extensions`：是否允许标记公开预览及其独立扩展名白名单。
+
+公开预览入口会再次校验预览白名单。默认仅包含 JPG、JPEG、PNG、WebP；不要将 HTML、SVG、JavaScript 等可执行内容加入公开预览白名单。文件头校验只覆盖已实现魔数识别的二进制格式，其中 `docx/xlsx` 还会检查 Office ZIP 容器的必要条目；文本类文件没有通用魔数。
+
 ## 下载和预览
 
 私有管理接口需要登录和接口权限；公开接口必须同时满足文件公开条件。下载返回附件响应，预览返回 inline 响应。
@@ -79,6 +90,7 @@ storageManager.unmarkUse(oldFileKey);
 - 上传目录不要放在应用发布目录内。
 - 对公开桶和私有桶使用不同访问策略。
 - 限制扩展名、MIME、大小和上传频率。
+- 公开预览白名单优先只保留图片等非主动内容类型。
 - 对对象存储开启生命周期或定期清理未使用记录。
 - 备份时同时考虑数据库元数据和实际文件。
 - 外部存储配置错误时查看服务端异常链，不向前端回显完整供应商响应和凭据。

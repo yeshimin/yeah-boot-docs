@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+set -eu
+
+git diff --cached --check
+
+# 默认保持轻量；需要在本机提交前构建文档时显式开启。
+if [ "${YEAH_BOOT_RUN_DOCS_BUILD_ON_COMMIT:-0}" = "1" ]; then
+  npm run build
+fi

@@ -17,6 +17,7 @@ YeahBoot 的配置分为两类：启动时基础配置和运行时业务参数�
 | Redis      | `spring.redis`                                 | 地址、端口、数据库和认证信息     |
 | JWT        | `auth.token.jwt`                               | 签名密钥、有效期与时钟偏差       |
 | Token 策略 | `auth.token`                                   | subject、terminal 与在线数量限制 |
+| API 报文加密 | `api.encryption`                               | 加密模式、套件、密钥标识与私钥注入 |
 | 全局权限   | `yeah-boot.safe-mode`、`yeah-boot.super-admin` | 安全模式与超级管理员账号         |
 | 文件存储   | `yeah-boot.storage`                            | 本地、七牛和 MinIO 实现          |
 | WebSocket  | `yeah-boot.websocket`                          | 是否启用、心跳间隔和超时         |
@@ -65,20 +66,22 @@ yeah-boot:
 
 | 参数键                                             | 类型   |  默认值 | 作用               |
 | -------------------------------------------------- | ------ | ------: | ------------------ |
-| `yeah-boot.captcha-enabled`                        | 布尔   |  `true` | 管理后台图形验证码 |
-| `auth.admin-login.failure-window-seconds`          | 长整数 |   `600` | 登录失败统计窗口   |
-| `auth.admin-login.max-failure-count`               | 长整数 |     `5` | 最大失败次数       |
-| `auth.admin-login.lock-seconds`                    | 长整数 |   `600` | 临时锁定时长       |
-| `yeah-boot.sms-code-length`                        | 整数   |     `6` | 短信验证码长度     |
-| `yeah-boot.sms-code-exp-seconds`                   | 整数   |   `300` | 短信验证码有效期   |
-| `yeah-boot.notification.aliyun.sms.template-code`  | 字符串 |      空 | 短信模板编号       |
-| `yeah-boot.notification.aliyun.sms.sign-name`      | 字符串 |      空 | 短信签名           |
-| `yeah-boot.sys-user-excel.max-import-file-size-mb` | 长整数 |     `5` | 导入文件大小上限   |
-| `yeah-boot.sys-user-excel.max-import-rows`         | 整数   |  `1000` | 单次导入行数上限   |
-| `yeah-boot.sys-user-excel.max-export-rows`         | 整数   | `10000` | 单次导出行数上限   |
-| `yeah-boot.sys-user-excel.max-error-messages`      | 整数   |    `20` | 导入错误展示数量   |
+| `admin.auth.login.captcha-enabled`                 | 布尔   |  `true` | 管理后台图形验证码 |
+| `admin.auth.login.failure-window-seconds`          | 长整数 |   `600` | 登录失败统计窗口   |
+| `admin.auth.login.failure-count`                   | 长整数 |     `5` | 最大失败次数       |
+| `admin.auth.login.lock-seconds`                    | 长整数 |   `600` | 临时锁定时长       |
+| `global.sms.code-length`                           | 整数   |     `6` | 短信验证码长度     |
+| `global.sms.code-exp-seconds`                      | 整数   |   `300` | 短信验证码有效期   |
+| `global.sms.aliyun.template-code`                  | 字符串 |      空 | 短信模板编号       |
+| `global.sms.aliyun.sign-name`                      | 字符串 |      空 | 短信签名           |
+| `admin.import-export.sys-user-excel.max-import-file-size-mb` | 长整数 | `5` | 导入文件大小上限 |
+| `admin.import-export.sys-user-excel.max-import-rows`         | 整数   | `1000` | 单次导入行数上限 |
+| `admin.import-export.sys-user-excel.max-export-rows`         | 整数   | `10000` | 单次导出行数上限 |
+| `admin.import-export.sys-user-excel.max-error-messages`      | 整数   | `20` | 导入错误展示数量 |
 
 参数缺失、禁用或格式错误时使用代码枚举中的默认值。数据变更后会刷新缓存，也可以在系统参数页面手动重新加载。
+
+登录失败限制、密码提示规则和上传策略同样属于运行时系统参数。完整参数表与安全边界见[应用安全基线](/security/application-security-baseline)。
 
 ## 配置优先级建议
 
