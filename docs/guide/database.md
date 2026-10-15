@@ -7,14 +7,44 @@ description: YeahBoot 数据库脚本、核心表、逻辑删除和初始化检�
 
 ## 脚本顺序
 
-后端仓库 `sql/` 目录包含主库和可选地区扩展数据。登录安全、上传策略和审计字段已纳入主库初始化脚本。首次部署应先备份目标库，再导入主库脚本；地区扩展数据量较大，按实际业务选择。
+后端仓库 `sql/` 目录将表结构、基础数据和地区数据拆分为多个压缩包。首次部署应先备份目标库，再按顺序导入；街道、村庄数据量较大，按实际业务选择。
 
 推荐顺序：
 
-1. 导入 `00.main.sql.zip`。
-2. 按需导入 `01.street_and_village_data.sql.zip`。
+1. 导入 `01.structure.sql.zip`：核心表结构与索引。
+2. 导入 `02.data_without_area.sql.zip`：基础初始化数据，不含地区数据。
+3. 导入 `03.data_area_level_1_to_3.sql.zip`：省、市、区县地区数据。
+4. 按需导入 `04.data_area_level_4_to_5.sql.zip`：街道与村庄地区数据。
+
+如只需要基础地区信息，导入前 3 个包即可；需要完整地区树时再导入第 4 个包。
 
 对于已有环境，应按本项目发布时提供的数据库迁移方案升级；不要把全量初始化脚本直接覆盖到保留业务数据的库。
+
+## MySQL 5.7 兼容导入
+
+初始化脚本以 MySQL 8 为基线。若目标数据库为 MySQL 5.7.6+，可在后端仓库根目录使用 `script/mysql8_to_mysql57.py` 转换常见的 MySQL 8 排序规则和函数唯一索引。
+
+函数唯一索引会转换为“存储生成列 + 普通唯一索引”，以保留逻辑删除场景下的唯一性约束。因此数据 Dump 使用 `INSERT INTO table VALUES (...)` 时，必须让脚本补充原始物理列名，避免把新增生成列计入值数量。
+
+```bash
+# 仅结构 SQL
+python3 script/mysql8_to_mysql57.py \
+  --input yeahboot_structure.sql \
+  --output output/structure.mysql57.sql
+
+# 仅数据 SQL：必须指定对应的原始结构 SQL
+python3 script/mysql8_to_mysql57.py \
+  --input yeahboot_data.sql \
+  --schema yeahboot_structure.sql \
+  --output output/data.mysql57.sql
+
+# 结构和数据在同一个 SQL 文件时，不需要 --schema
+python3 script/mysql8_to_mysql57.py \
+  --input yeahboot_full.sql \
+  --output output/yeahboot_full.mysql57.sql
+```
+
+结构与数据分开时，先导入转换后的结构文件，再导入转换后的数据文件。始终保留原始 MySQL 8 Dump；该脚本用于初始化空库，不用于覆盖已有业务数据的环境。
 
 ## 核心表
 
