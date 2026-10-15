@@ -11,10 +11,10 @@ description: YeahBoot 数据库脚本、核心表、逻辑删除和初始化检�
 
 推荐顺序：
 
-1. 导入 `01.structure.sql.zip`：核心表结构与索引。
-2. 导入 `02.data_without_area.sql.zip`：基础初始化数据，不含地区数据。
-3. 导入 `03.data_area_level_1_to_3.sql.zip`：省、市、区县地区数据。
-4. 按需导入 `04.data_area_level_4_to_5.sql.zip`：街道与村庄地区数据。
+1. 导入 `00.structure.sql.zip`：核心表结构与索引。
+2. 导入 `01.data_without_area.sql.zip`：基础初始化数据，不含地区数据。
+3. 导入 `02.data_area_level_1_to_3.sql.zip`：省、市、区县地区数据。
+4. 按需导入 `03.data_area_level_4_to_5.sql.zip`：街道与村庄地区数据。
 
 如只需要基础地区信息，导入前 3 个包即可；需要完整地区树时再导入第 4 个包。
 
