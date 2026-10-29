@@ -9,6 +9,8 @@ description: YeahBoot 管理后台静态资源与后端 API 的 Nginx 同源代�
 
 推荐让浏览器访问管理后台和 API 时使用同一来源：前端请求 `/api/**`，Nginx 去掉 `/api` 前缀后转发给 `yeah-admin` 服务。这样无需在浏览器处理跨域。
 
+如果前端与 API 因架构原因必须跨来源部署，再在后端启用 `yeah-boot.cors` 并仅放行可信前端来源；配置项与安全边界见[运行配置](/guide/configuration#跨域访问)。同源代理仍是生产环境首选。
+
 ## 示例
 
 以下示例假定：

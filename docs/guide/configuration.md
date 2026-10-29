@@ -19,6 +19,7 @@ YeahBoot 的配置分为两类：启动时基础配置和运行时业务参数�
 | Token 策略 | `auth.token`                                   | subject、terminal 与在线数量限制 |
 | API 报文加密 | `api.encryption`                               | 加密模式、套件、密钥标识与私钥注入 |
 | 全局权限   | `yeah-boot.safe-mode`、`yeah-boot.super-admin` | 安全模式与超级管理员账号         |
+| 跨域访问   | `yeah-boot.cors`                                | 跨来源浏览器请求规则             |
 | 文件存储   | `yeah-boot.storage`                            | 本地、七牛和 MinIO 实现          |
 | WebSocket  | `yeah-boot.websocket`                          | 是否启用、心跳间隔和超时         |
 | ID 生成    | `yeah-boot.id-generator`                       | 编码字符集与最小长度             |
@@ -49,6 +50,43 @@ yeah-boot:
 ::: danger 生产环境
 生产环境必须关闭 `safe-mode`，并替换 JWT、数据库、Redis、短信与对象存储相关凭据。不要将真实值提交到 Git。
 :::
+
+## 跨域访问
+
+管理后台和 API 同源部署时，浏览器请求统一走 `/api/**`，不需要开启 CORS。只有前端与 API 必须使用不同来源时，才启用 `yeah-boot.cors`：
+
+```yaml
+yeah-boot:
+  cors:
+    enabled: true
+    path-pattern: /**
+    allowed-origin-patterns:
+      - https://admin.example.com
+      - https://*.example.com
+    allowed-methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - OPTIONS
+    allowed-headers:
+      - Authorization
+      - Content-Type
+      - Idempotency-Key
+    exposed-headers:
+      - Content-Disposition
+      - Content-Length
+    allow-credentials: false
+    max-age: 3600
+```
+
+- CORS 默认关闭。启用时 `allowed-origin-patterns`、`allowed-methods`、`allowed-headers` 均不能为空；应用启动时会校验。
+- `allowed-origin-patterns` 应使用明确的可信来源；受控子域可使用 `https://*.example.com`。不要在生产环境无约束地开放来源。
+- 管理后台默认使用 `Authorization: Bearer <token>`，不依赖 Cookie，因此一般保持 `allow-credentials: false`。只有确实需要携带 Cookie 等浏览器凭证时才启用它。
+- 文件下载时浏览器若需读取 `Content-Disposition`，必须将该响应头列入 `exposed-headers`；默认配置已包含它。
+
+同源反向代理优先于跨域部署。Nginx 配置见[管理后台与 API 代理](/deployment/nginx)。
 
 ## 服务端 Token 策略
 

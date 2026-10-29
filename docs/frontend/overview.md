@@ -71,6 +71,8 @@ npm run build
 
 推荐生产环境仍使用同源 `/api`，减少跨域、Cookie 和证书配置复杂度。
 
+当前端与 API 必须跨来源时，后端可通过 `yeah-boot.cors` 配置允许的来源、请求头和方法；管理后台使用 Bearer Token，通常不需要浏览器凭证模式。详细配置见[运行配置](/guide/configuration#跨域访问)。
+
 ## 组件开发原则
 
 - 业务请求集中在 `src/api`。
