@@ -108,6 +108,7 @@ yeah-boot:
 | `admin.auth.login.failure-window-seconds`          | 长整数 |   `600` | 登录失败统计窗口   |
 | `admin.auth.login.failure-count`                   | 长整数 |     `5` | 最大失败次数       |
 | `admin.auth.login.lock-seconds`                    | 长整数 |   `600` | 临时锁定时长       |
+| `admin.layout.navigation-mode`                     | 字符串 |  `side` | 管理后台导航模式   |
 | `global.sms.code-length`                           | 整数   |     `6` | 短信验证码长度     |
 | `global.sms.code-exp-seconds`                      | 整数   |   `300` | 短信验证码有效期   |
 | `global.sms.aliyun.template-code`                  | 字符串 |      空 | 短信模板编号       |
@@ -118,6 +119,8 @@ yeah-boot:
 | `admin.import-export.sys-user-excel.max-error-messages`      | 整数   | `20` | 导入错误展示数量 |
 
 参数缺失、禁用或格式错误时使用代码枚举中的默认值。数据变更后会刷新缓存，也可以在系统参数页面手动重新加载。
+
+`admin.layout.navigation-mode` 必须启用并允许公开访问，只接受 `side` 或 `top`。管理后台在进入主页面前读取该参数并写入浏览器缓存；刷新页面时重新读取，接口临时不可用时使用上次缓存。
 
 登录失败限制、密码提示规则和上传策略同样属于运行时系统参数。完整参数表与安全边界见[应用安全基线](/security/application-security-baseline)。
 
